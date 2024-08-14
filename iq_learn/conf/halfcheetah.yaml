@@ -1,0 +1,91 @@
+agent:
+  _target_: agent.sac.SAC
+  action_dim: ''
+  actor_betas:
+  - 0.9
+  - 0.999
+  actor_cfg: &id001
+    _target_: agent.sac_models.DiagGaussianActor
+    action_dim: ''
+    hidden_depth: 2
+    hidden_dim: 256
+    log_std_bounds:
+    - -5
+    - 2
+    obs_dim: ''
+  actor_lr: 3.0e-05
+  actor_update_frequency: 1
+  alpha_betas:
+  - 0.9
+  - 0.999
+  alpha_lr: 0.0003
+  critic_betas:
+  - 0.9
+  - 0.999
+  critic_cfg: &id002
+    _target_: agent.sac_models.SingleQCritic
+    action_dim: ''
+    hidden_depth: 2
+    hidden_dim: 256
+    obs_dim: ''
+  critic_lr: 0.0003
+  critic_target_update_frequency: 1
+  critic_tau: 0.005
+  init_temp: 0.01
+  learn_temp: false
+  name: sac
+  obs_dim: ''
+  vdice_actor: false
+cuda_deterministic: false
+defaults: ''
+device: ''
+diag_gaussian_actor: *id001
+env:
+  demo: HalfCheetah-v2_25.pkl
+  eps_steps: 100000
+  eps_window: 10
+  eval_interval: 5000
+  learn_steps: 350000
+  name: HalfCheetah-v2
+  replay_mem: 1000000
+eval:
+  eps: 10
+  expert_env: ''
+  policy: null
+  threshold: 5000
+  transfer: false
+  use_baselines: false
+eval_only: false
+exp_name: ''
+expert:
+  demos: 10
+  subsample_freq: 1
+gamma: 0.99
+hydra_base_dir: ''
+log_dir: logs/
+log_interval: 500
+method:
+  alpha: 0.5
+  chi: false
+  constrain: false
+  div: null
+  grad_pen: false
+  lambda_gp: 10
+  loss: value
+  mix_coeff: 1
+  regularize: true
+  tanh: false
+  type: iq
+num_actor_updates: 1
+num_seed_steps: 0
+offline: false
+only_expert_states: false
+pretrain: null
+project_name: SAC_HalfCheetah-v2
+q_net: *id002
+save_interval: 5
+seed: 0
+train:
+  batch: 256
+  soft_update: true
+  use_target: true
