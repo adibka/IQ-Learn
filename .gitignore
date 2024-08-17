@@ -131,8 +131,9 @@ dmypy.json
 # Ignored folders
 iq_learn/outputs
 iq_learn/wandb
-iq_learn/experts
 iq_learn/logs
 iq_learn/results
 iq_learn/results_best
 iq_learn/trained_policies
+iq_learn/experts
+
